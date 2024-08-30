@@ -16,10 +16,10 @@ def pai(i):
 def filho_esquerdo(i):
     return 2*i
 
-def filho_direito(i):
+def filho_direito(i:int):
     return 2 * i + 1
 
-def ajusta_max_heap(vetor, i, tam_heap):
+def ajusta_max_heap(vetor:list, i, tam_heap):
     esq = filho_esquerdo(i) #l
     dir = filho_direito(i)  #r
 
@@ -33,6 +33,9 @@ def ajusta_max_heap(vetor, i, tam_heap):
    
     if maior != i:
         tam_heap = tam_heap - 1
+        temp = vetor[i]
+        vetor[i] = vetor[maior]
+        vetor[maior] = vetor[temp]
         #trocar posições a[i] com a[maior]
         ajusta_max_heap(vetor, maior, tam_heap)
 
