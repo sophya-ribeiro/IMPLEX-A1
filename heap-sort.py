@@ -10,16 +10,16 @@ Algoritmo de ordenação por Max-Heap
          
 """
 
-def pai(i):
+def pai(i:int):
     return i//2
 
-def filho_esquerdo(i):
+def filho_esquerdo(i:int):
     return 2*i
 
 def filho_direito(i:int):
     return 2 * i + 1
 
-def ajusta_max_heap(vetor:list, i, tam_heap):
+def ajusta_max_heap(vetor:list, i:int, tam_heap:int):
     esq = filho_esquerdo(i) #l
     dir = filho_direito(i)  #r
 
