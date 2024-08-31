@@ -21,7 +21,7 @@ def filho_esquerdo(i: int):
     return 2 * i + 1
 
 def filho_direito(i: int):
-    return 2 * i + 2
+    return 2 * i + 1 + 1
 
 def ajusta_max_heap(vetor: list, i: int, tam_heap: int):
     esq = filho_esquerdo(i)  # l
@@ -78,12 +78,10 @@ def main():
 
     print("\nVetor nominal: ")
     imprimir_vetor(vetor)
-
     print("\n")
 
     heap_sort(vetor)
 
     print("Vetor ordenado: ")
     imprimir_vetor(vetor)
-
     print("\n")
