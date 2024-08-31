@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
+
 """
 Algoritmo de ordenação por Max-Heap
 
-- Receber um tamanho de vetor
-- Ler os elementos do vetor
-- Construir max-heap com o vetor lido
-- Ordenar a max-heap
 """
 #--------imports--------#
 
@@ -85,3 +82,6 @@ def main():
     print("Vetor ordenado: ")
     imprimir_vetor(vetor)
     print("\n")
+
+if __name__ == '__main__':
+    main()
