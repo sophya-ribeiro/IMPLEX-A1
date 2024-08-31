@@ -10,6 +10,8 @@ Algoritmo de ordenação por Max-Heap
          
 """
 
+#-------funções principais-------#
+
 def pai(i:int):
     return i//2
 
@@ -39,3 +41,28 @@ def ajusta_max_heap(vetor:list, i:int, tam_heap:int):
         #trocar posições a[i] com a[maior]
         ajusta_max_heap(vetor, maior, tam_heap)
 
+
+#-------funções auxiliares-------#
+
+def ler_arquivo(nome_arquivo:str):
+    try:
+        with open(nome_arquivo, 'r') as arquivo:
+            linhas = arquivo.readlines()
+            
+            numeros = [int(linha.strip()) for linha in linhas]
+        
+        #print("Conteúdo do arquivo '{}':".format(nome_arquivo))
+        #for numero in numeros:
+        #    print("{}".format(numero))
+        
+        return numeros
+    
+    except FileNotFoundError:
+        print("Erro: O arquivo '{}' não foi encontrado.".format(nome_arquivo))
+        return None
+
+
+#--------algoritmo--------#
+
+nome_arquivo = input("Digite o nome do arquivo: ")
+numeros = ler_arquivo(nome_arquivo)
