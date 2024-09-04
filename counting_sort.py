@@ -1,34 +1,21 @@
 # -*- coding: utf-8 -*-
-
 import sys
 
-def swap_values(index1: int, index2: int, array: list):
-    """
-    Função que realiza a troca de posição entre dois valores
-    presentes nas posições index1 e index2 de um vetor.
-    """
-    
-    
-    backup = array[index1]
-    array[index1] = array[index2]
-    array[index2] = backup
 
-def bubble_sort(array: list, size_array: int):
+def counting_sort():
     """
-    Algoritmo de ordenação Bubble Sort.
+    Algoritmo de ordenação Counting Sort.
     Esta função ordena um vetor (array) de modo crescente.
-    Recebe o vetor e o tamanho do vetor.
+    Recebe o VALORES.
     """
-    
-    for i in range(0, size_array-1):
-        for j in range(0, size_array-1):
-            if array[j] > array[j+1]:
-                swap_values(j,j+1, array)
+    pass
+
+
 
 def main():
     """
     Função criada apenas para testes do algoritmo 
-    de ordenação Bubble sort.
+    de ordenação Counting Sort.
     """
 
     file_name = sys.argv[1]
@@ -39,11 +26,13 @@ def main():
             #Caso de list comprehension
             numbers = [int(line.strip()) for line in lines]
             
-        bubble_sort(numbers, len(numbers))
+        counting_sort()
 
+        '''
         for index in range(0, len(numbers)-1):
             print(f"{numbers[index]} ", end='')
         print(f"{numbers[len(numbers)-1]}")
+        '''
 
     except FileNotFoundError:
         print("Erro: Arquivo '{}' não encontrado.".format(file_name))
