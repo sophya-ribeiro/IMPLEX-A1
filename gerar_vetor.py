@@ -1,5 +1,5 @@
 import random
-
+import math
 """
 Gera um arquivo .txt com números aleatórios.
 Recebe 'fim', 'inc', 'stp' e 'rpt'
@@ -27,7 +27,7 @@ def gerar_vetor_quase_ordenado(n, nome_arquivo):
 
     numeros.sort()
 
-    i_toshuffle = [random.randint(1, n) for _ in range(int(0.1 * n))]
+    i_toshuffle = [random.randint(1, n) for _ in range(math.ceil(0.1 * n))]
     #lista de índices das posições que serão trocadas 
 
     for i in range(0, len(i_toshuffle)):
