@@ -17,65 +17,77 @@ def ler_arquivo(nome_arquivo: str):
             numeros = [int(linha.strip()) for linha in linhas]
         return numeros
     except FileNotFoundError:
-        print("Erro: Arquivo '{}' não encontrado.".format(nome_arquivo))
-        return None
+        print(f"Erro: Arquivo '{nome_arquivo}' não encontrado.")
+        
+
+def medir_tempo(func, array):
+    inicio = time.perf_counter()
+    func(array)
+    fim = time.perf_counter()
+    return fim - inicio
+
+def gerar_tabela_comparacao(vetores_nomes):
+    print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}{'Merge':<10}{'Quick':<10}{'Heap':<10}{'Counting':<10}")
+
+    tempos_bubble = []
+    tempos_insertion = []
+    tempos_merge = []
+    tempos_quick = []
+    tempos_heap = []
+    tempos_counting = []
+    tamanhos = []
+
+    for nome_arquivo in vetores_nomes:
+        vetor = ler_arquivo(nome_arquivo)
+        tamanho = len(vetor)
+        max_value = max(vetor)
+
+        tempos = [
+            medir_tempo(lambda arr: bubble_sort.bubble_sort(arr.copy(), len(arr)), vetor),
+            medir_tempo(lambda arr: insertion_sort.insertion_sort(arr.copy()), vetor),
+            medir_tempo(lambda arr: merge_sort.merge_sort(arr.copy(), 0, len(arr) - 1), vetor),
+            medir_tempo(lambda arr: quick_sort.quick_sort(arr.copy(), 0, len(arr) - 1), vetor),
+            medir_tempo(lambda arr: heap_sort.heap_sort(arr.copy()), vetor),
+            medir_tempo(lambda arr: counting_sort.counting_sort(arr.copy(), [0] * len(arr), max_value), vetor)
+        ]
+
+        tempos_bubble.append(tempos[0])
+        tempos_insertion.append(tempos[1])
+        tempos_merge.append(tempos[2])
+        tempos_quick.append(tempos[3])
+        tempos_heap.append(tempos[4])
+        tempos_counting.append(tempos[5])
+        tamanhos.append(tamanho)
+
+        print(f"{tamanho:<10}" + "".join([f"{tempo:<10.6f}" for tempo in tempos]))
+
+    return tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting
 
 #----------Main----------#
 
 def main():
-    nome_arquivo = 'mil.txt'
-    vetor = ler_arquivo(nome_arquivo)
-
-    start = time.time()
-    heap_sort.heap_sort(vetor)
-    end = time.time()
+    vetores_nomes = ['dez.txt', 'mil.txt', 'cincomil.txt']
 
     print()
-    print(f"Tempo de execução HEAP SORT: {end-start:.6f}")
+    tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting = gerar_tabela_comparacao(vetores_nomes)
     print()
 
-    vetor = ler_arquivo(nome_arquivo)
-    start = time.time()
-    insertion_sort.insertion_sort(vetor)
-    end = time.time()
+    fig, ax = plt.subplots()
 
-    print(f"Tempo de execução INSERTION SORT: {end-start:.6f}")
-    print()
+    ax.plot(tamanhos, tempos_bubble, label='Bubble Sort', marker='o')
+    ax.plot(tamanhos, tempos_insertion, label='Insertion Sort', marker='o')
+    ax.plot(tamanhos, tempos_merge, label='Merge Sort', marker='o')
+    ax.plot(tamanhos, tempos_quick, label='Quick Sort', marker='o')
+    ax.plot(tamanhos, tempos_heap, label='Heap Sort', marker='o')
+    ax.plot(tamanhos, tempos_counting, label='Counting Sort', marker='o')
 
-    vetor = ler_arquivo(nome_arquivo)
-    tam_vetor = len(vetor)
+    ax.set_xlabel('Tamanho do Vetor')
+    ax.set_ylabel('Tempo de Execução (segundos)')
+    ax.set_title('Vetor aleatório')
+    ax.legend()
+    ax.grid(True)
 
-    start = time.time()
-    quick_sort.quick_sort(vetor, 0, tam_vetor-1)
-    end = time.time()
+    plt.show()
 
-    print(f"Tempo de execução QUICK SORT: {end-start:.6f}")
-    print()
-
-    vetor = ler_arquivo(nome_arquivo)
-    start = time.time()
-    merge_sort.merge_sort(vetor, 0, len(vetor) -1)
-    end = time.time()
-
-    print(f"Tempo de execução MERGE SORT: {end-start:.6f}")
-    print()
-
-    vetor = ler_arquivo(nome_arquivo)
-    start = time.time()
-    bubble_sort.bubble_sort(vetor, len(vetor))
-    end = time.time()
-
-    print(f"Tempo de execução BUBBLE SORT: {end-start:.6f}")
-    print()
-
-    vetor = ler_arquivo(nome_arquivo)
-    start = time.time()
-    array_ordered = [0 for _ in range(len(vetor))]
-    counting_sort.counting_sort(vetor, array_ordered, max(vetor))
-    end = time.time()
-
-    print(f"Tempo de execução COUNTING SORT: {end-start:.6f}")
-    print()
-
-
-main()
+if __name__ == '__main__':
+    main()

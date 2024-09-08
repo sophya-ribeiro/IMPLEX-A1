@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Algoritmo de ordenação por Max-Heap
+Algoritmo de ordenação por inserção
 
 """
     
