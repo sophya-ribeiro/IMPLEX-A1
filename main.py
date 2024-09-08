@@ -43,30 +43,30 @@ def gerar_tabela_comparacao(vetores_nomes):
         max_value = max(vetor)
 
         tempos = [
+            medir_tempo(lambda arr: counting_sort.counting_sort(arr.copy(), [0] * len(arr), max_value), vetor),
             medir_tempo(lambda arr: bubble_sort.bubble_sort(arr.copy(), len(arr)), vetor),
             medir_tempo(lambda arr: insertion_sort.insertion_sort(arr.copy()), vetor),
             medir_tempo(lambda arr: merge_sort.merge_sort(arr.copy(), 0, len(arr) - 1), vetor),
             medir_tempo(lambda arr: quick_sort.quick_sort(arr.copy(), 0, len(arr) - 1), vetor),
-            medir_tempo(lambda arr: heap_sort.heap_sort(arr.copy()), vetor),
-            medir_tempo(lambda arr: counting_sort.counting_sort(arr.copy(), [0] * len(arr), max_value), vetor)
+            medir_tempo(lambda arr: heap_sort.heap_sort(arr.copy()), vetor)
         ]
 
-        tempos_bubble.append(tempos[0])
-        tempos_insertion.append(tempos[1])
-        tempos_merge.append(tempos[2])
-        tempos_quick.append(tempos[3])
-        tempos_heap.append(tempos[4])
-        tempos_counting.append(tempos[5])
+        tempos_counting.append(tempos[0])
+        tempos_bubble.append(tempos[1])
+        tempos_insertion.append(tempos[2])
+        tempos_merge.append(tempos[3])
+        tempos_quick.append(tempos[4])
+        tempos_heap.append(tempos[5])
         tamanhos.append(tamanho)
 
         print(f"{tamanho:<10}" + "".join([f"{tempo:<10.6f}" for tempo in tempos]))
 
-    return tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting
+    return tamanhos, tempos_counting, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap
 
 #----------Main----------#
 
 def main():
-    vetores_nomes = ['dez.txt', 'mil.txt', 'cincomil.txt']
+    vetores_nomes = ['dez.txt', 'vinte.txt', 'trinta.txt', 'quarenta.txt', 'cinquenta.txt', 'sessenta.txt', 'setenta.txt']
 
     print()
     tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting = gerar_tabela_comparacao(vetores_nomes)
