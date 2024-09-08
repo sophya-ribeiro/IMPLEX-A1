@@ -71,7 +71,7 @@ def gerar_tabela_comparacao(vetores_nomes):
 def main():
 
     print()
-    vetores_nomes = ['mil.txt', 'doismil.txt', 'tresmil.txt', 'quatromil.txt', 'cincomil.txt']
+    vetores_nomes = ['Dados/mil.txt', 'Dados/doismil.txt', 'Dados/tresmil.txt', 'Dados/quatromil.txt', 'Dados/cincomil.txt']
     tamanhos, tempos_bubble, tempos_insertion = gerar_tabela_comparacao(vetores_nomes)
     # tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting = gerar_tabela_comparacao(vetores_nomes)
     print()
