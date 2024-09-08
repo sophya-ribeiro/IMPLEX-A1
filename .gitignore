@@ -1,16 +1,2 @@
 #ambiente virtual
-.venv
-
-#dados para ordenação
-dados.txt
-dez.txt
-mil.txt
-vinte.txt
-cincomil.txt
-
-#BO da Soraya
-trinta.txt
-quarenta.txt
-cinquenta.txt
-sessenta.txt
-setenta.txt
+.venv/

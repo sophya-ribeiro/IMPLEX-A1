@@ -7,6 +7,7 @@ import merge_sort
 
 import time
 import matplotlib.pyplot as plt
+import numpy as np
 
 #-------Funções auxiliares-------#
 
@@ -27,6 +28,7 @@ def medir_tempo(func, array):
     return fim - inicio
 
 def gerar_tabela_comparacao(vetores_nomes):
+    print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}")
     print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}{'Merge':<10}{'Quick':<10}{'Heap':<10}{'Counting':<10}")
 
     tempos_bubble = []
@@ -61,25 +63,31 @@ def gerar_tabela_comparacao(vetores_nomes):
 
         print(f"{tamanho:<10}" + "".join([f"{tempo:<10.6f}" for tempo in tempos]))
 
-    return tamanhos, tempos_counting, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap
+    # return tamanhos, tempos_bubble, tempos_insertion
+    return tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting
 
 #----------Main----------#
 
 def main():
-    vetores_nomes = ['dez.txt', 'vinte.txt', 'trinta.txt', 'quarenta.txt', 'cinquenta.txt', 'sessenta.txt', 'setenta.txt']
 
     print()
+    vetores_nomes = ['Dados/mil.txt', 'Dados/doismil.txt', 'Dados/tresmil.txt', 'Dados/quatromil.txt', 'Dados/cincomil.txt']
+    # tamanhos, tempos_bubble, tempos_insertion = gerar_tabela_comparacao(vetores_nomes)
     tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting = gerar_tabela_comparacao(vetores_nomes)
     print()
 
     fig, ax = plt.subplots()
 
-    ax.plot(tamanhos, tempos_bubble, label='Bubble Sort', marker='o')
-    ax.plot(tamanhos, tempos_insertion, label='Insertion Sort', marker='o')
-    ax.plot(tamanhos, tempos_merge, label='Merge Sort', marker='o')
-    ax.plot(tamanhos, tempos_quick, label='Quick Sort', marker='o')
-    ax.plot(tamanhos, tempos_heap, label='Heap Sort', marker='o')
-    ax.plot(tamanhos, tempos_counting, label='Counting Sort', marker='o')
+    ax.plot(tamanhos, tempos_bubble, label='Bubble', marker='o')
+    ax.plot(tamanhos, tempos_insertion, label='Insertion', marker='o')
+    ax.plot(tamanhos, tempos_merge, label='Merge', marker='o')
+    ax.plot(tamanhos, tempos_quick, label='Quick', marker='o')
+    ax.plot(tamanhos, tempos_heap, label='Heap', marker='o')
+    ax.plot(tamanhos, tempos_counting, label='Counting', marker='o')
+
+    xticks_interval = 1000
+    xticks = np.arange(min(tamanhos), max(tamanhos) + xticks_interval, xticks_interval)
+    ax.set_xticks(xticks)
 
     ax.set_xlabel('Tamanho do Vetor')
     ax.set_ylabel('Tempo de Execução (segundos)')
