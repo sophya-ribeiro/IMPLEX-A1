@@ -29,7 +29,7 @@ def medir_tempo(func, array):
 
 def gerar_tabela_comparacao(vetores_nomes):
     print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}")
-    # print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}{'Merge':<10}{'Quick':<10}{'Heap':<10}{'Counting':<10}")
+    print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}{'Merge':<10}{'Quick':<10}{'Heap':<10}{'Counting':<10}")
 
     tempos_bubble = []
     tempos_insertion = []
@@ -47,24 +47,24 @@ def gerar_tabela_comparacao(vetores_nomes):
         tempos = [
             medir_tempo(lambda arr: bubble_sort.bubble_sort(arr.copy(), len(arr)), vetor),
             medir_tempo(lambda arr: insertion_sort.insertion_sort(arr.copy()), vetor),
-            # medir_tempo(lambda arr: merge_sort.merge_sort(arr.copy(), 0, len(arr) - 1), vetor),
-            # medir_tempo(lambda arr: quick_sort.quick_sort(arr.copy(), 0, len(arr) - 1), vetor),
-            # medir_tempo(lambda arr: heap_sort.heap_sort(arr.copy()), vetor),
-            # medir_tempo(lambda arr: counting_sort.counting_sort(arr.copy(), [0] * len(arr), max_value), vetor)
+            medir_tempo(lambda arr: merge_sort.merge_sort(arr.copy(), 0, len(arr) - 1), vetor),
+            medir_tempo(lambda arr: quick_sort.quick_sort(arr.copy(), 0, len(arr) - 1), vetor),
+            medir_tempo(lambda arr: heap_sort.heap_sort(arr.copy()), vetor),
+            medir_tempo(lambda arr: counting_sort.counting_sort(arr.copy(), [0] * len(arr), max_value), vetor)
         ]
 
         tempos_bubble.append(tempos[0])
         tempos_insertion.append(tempos[1])
-        # tempos_merge.append(tempos[2])
-        # tempos_quick.append(tempos[3])
-        # tempos_heap.append(tempos[4])
-        # tempos_counting.append(tempos[5])
+        tempos_merge.append(tempos[2])
+        tempos_quick.append(tempos[3])
+        tempos_heap.append(tempos[4])
+        tempos_counting.append(tempos[5])
         tamanhos.append(tamanho)
 
         print(f"{tamanho:<10}" + "".join([f"{tempo:<10.6f}" for tempo in tempos]))
 
-    return tamanhos, tempos_bubble, tempos_insertion
-    # return tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting
+    # return tamanhos, tempos_bubble, tempos_insertion
+    return tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting
 
 #----------Main----------#
 
@@ -72,18 +72,18 @@ def main():
 
     print()
     vetores_nomes = ['Dados/mil.txt', 'Dados/doismil.txt', 'Dados/tresmil.txt', 'Dados/quatromil.txt', 'Dados/cincomil.txt']
-    tamanhos, tempos_bubble, tempos_insertion = gerar_tabela_comparacao(vetores_nomes)
-    # tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting = gerar_tabela_comparacao(vetores_nomes)
+    # tamanhos, tempos_bubble, tempos_insertion = gerar_tabela_comparacao(vetores_nomes)
+    tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting = gerar_tabela_comparacao(vetores_nomes)
     print()
 
     fig, ax = plt.subplots()
 
     ax.plot(tamanhos, tempos_bubble, label='Bubble', marker='o')
     ax.plot(tamanhos, tempos_insertion, label='Insertion', marker='o')
-    # ax.plot(tamanhos, tempos_merge, label='Merge', marker='o')
-    # ax.plot(tamanhos, tempos_quick, label='Quick', marker='o')
-    # ax.plot(tamanhos, tempos_heap, label='Heap', marker='o')
-    # ax.plot(tamanhos, tempos_counting, label='Counting', marker='o')
+    ax.plot(tamanhos, tempos_merge, label='Merge', marker='o')
+    ax.plot(tamanhos, tempos_quick, label='Quick', marker='o')
+    ax.plot(tamanhos, tempos_heap, label='Heap', marker='o')
+    ax.plot(tamanhos, tempos_counting, label='Counting', marker='o')
 
     xticks_interval = 1000
     xticks = np.arange(min(tamanhos), max(tamanhos) + xticks_interval, xticks_interval)
