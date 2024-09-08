@@ -34,7 +34,7 @@ def medir_tempo(func, array):
     return fim - inicio
 
 def gerar_tabela_comparacao(vetores_nomes):
-    print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}")
+    # print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}")
     print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}{'Merge':<10}{'Quick':<10}{'Heap':<10}{'Counting':<10}")
 
     tempos_bubble = []
