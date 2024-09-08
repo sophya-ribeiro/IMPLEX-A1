@@ -8,16 +8,16 @@ def counting_sort(array: list, array_ordered: list, max_value: int):
     Esta função ordena um vetor (array) de modo crescente.
     Recebe o VALORES.
     """
-    aux_array = [0 for _ in range(max_value + 1)]
+    aux_array = [0] * (max_value + 1)
 
     for index in range(0, len(array)):
         aux_array[array[index]] = aux_array[array[index]] + 1
 
-    for i in range(1, max_value):
+    for i in range(1, max_value + 1):
         aux_array[i] = aux_array[i] + aux_array[i -1]
     
     for j in range(len(array)-1, -1, -1):
-        array_ordered[aux_array[array[j]]] = array[j]
+        array_ordered[aux_array[array[j]] - 1] = array[j]
         aux_array[array[j]] = aux_array[array[j]] - 1
      
 
