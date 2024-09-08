@@ -1,3 +1,8 @@
-dados.txt
+#ambiente virtual
+.venv
 
+#dados para ordenação
+dados.txt
 dez.txt
+mil.txt
+vinte.txt

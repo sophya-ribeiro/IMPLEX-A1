@@ -8,7 +8,7 @@ def counting_sort(array: list, array_ordered: list, max_value: int):
     Esta função ordena um vetor (array) de modo crescente.
     Recebe o VALORES.
     """
-    aux_array = [0 for _ in range(max_value)]
+    aux_array = [0 for _ in range(max_value + 1)]
 
     for index in range(0, len(array)):
         aux_array[array[index]] = aux_array[array[index]] + 1

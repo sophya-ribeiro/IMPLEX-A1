@@ -4,12 +4,6 @@
 Algoritmo de ordenação por Max-Heap
 
 """
-#--------imports--------#
-
-import sys
-from typing import List, Optional
-
-#-------funções principais-------#
 
 def pai(i: int):
     return (i - 1) // 2
@@ -36,7 +30,7 @@ def ajusta_max_heap(vetor: list, i: int, tam_heap: int):
         vetor[i], vetor[maior] = vetor[maior], vetor[i]
         ajusta_max_heap(vetor, maior, tam_heap)
 
-def constroi_max_heap(vetor: List[int], tam_heap: int):
+def constroi_max_heap(vetor, tam_heap: int):
     for i in range(tam_heap // 2 - 1, -1, -1):
         ajusta_max_heap(vetor, i, tam_heap)
 
@@ -66,22 +60,3 @@ def imprimir_vetor(vetor: list):
     else:
         print("O vetor está vazio.")
 
-#--------main--------#
-
-def main():
-
-    nome_arquivo = sys.argv[1]
-    vetor = ler_arquivo(nome_arquivo)
-
-    print("\nVetor nominal: ")
-    imprimir_vetor(vetor)
-    print("\n")
-
-    heap_sort(vetor)
-
-    print("Vetor ordenado: ")
-    imprimir_vetor(vetor)
-    print("\n")
-
-if __name__ == '__main__':
-    main()
