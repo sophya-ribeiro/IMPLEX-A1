@@ -68,18 +68,17 @@ def gerar_tabela_comparacao(vetores_nomes):
 def main():
     vetores_nomes = ['dez.txt', 'mil.txt', 'cincomil.txt']
 
-    print()
     tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting = gerar_tabela_comparacao(vetores_nomes)
-    print()
+    
 
     fig, ax = plt.subplots()
 
-    ax.plot(tamanhos, tempos_bubble, label='Bubble Sort', marker='o')
-    ax.plot(tamanhos, tempos_insertion, label='Insertion Sort', marker='o')
-    ax.plot(tamanhos, tempos_merge, label='Merge Sort', marker='o')
-    ax.plot(tamanhos, tempos_quick, label='Quick Sort', marker='o')
-    ax.plot(tamanhos, tempos_heap, label='Heap Sort', marker='o')
-    ax.plot(tamanhos, tempos_counting, label='Counting Sort', marker='o')
+    ax.plot(tamanhos, tempos_bubble, label='Bubble', marker='o')
+    ax.plot(tamanhos, tempos_insertion, label='Insertion', marker='o')
+    ax.plot(tamanhos, tempos_merge, label='Merge', marker='o')
+    ax.plot(tamanhos, tempos_quick, label='Quick', marker='o')
+    ax.plot(tamanhos, tempos_heap, label='Heap', marker='o')
+    ax.plot(tamanhos, tempos_counting, label='Counting', marker='o')
 
     ax.set_xlabel('Tamanho do Vetor')
     ax.set_ylabel('Tempo de Execução (segundos)')
