@@ -4,105 +4,66 @@ import heap_sort
 import quick_sort
 import insertion_sort
 import merge_sort
-
+import random
+import math
 import time
-import matplotlib.pyplot as plt
-import numpy as np
+
 
 #-------Funções auxiliares-------#
 
-def ler_arquivo(nome_arquivo: str):
-    try:
-        with open(nome_arquivo, 'r') as arquivo:
-            linhas = arquivo.readlines()
-            numeros = [int(linha.strip()) for linha in linhas]
-        return numeros
-    except FileNotFoundError:
-        print(f"Erro: Arquivo '{nome_arquivo}' não encontrado.")
+def gerar_numeros_aleatorios(n: int) -> list:
+ 
+    # 'n**2' limitação para manter o tempo do counting sort linear
+    numeros = [random.randint(1, n**2) for _ in range(n)]
+    return numeros
 
-def salvar_em_arquivo(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting):
-    with open('saida.txt', 'w') as file:
-        file.write(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}{'Merge':<10}{'Quick':<10}{'Heap':<10}{'Counting':<10}\n")
-        for i in range(len(tamanhos)):
-            file.write(f"{tamanhos[i]:<10}{tempos_bubble[i]:<10.6f}{tempos_insertion[i]:<10.6f}{tempos_merge[i]:<10.6f}{tempos_quick[i]:<10.6f}{tempos_heap[i]:<10.6f}{tempos_counting[i]:<10.6f}\n")
-        
+  
+def gerar_vetor_quase_ordenado(n: int) -> list:
+    numeros = [random.randint(1, n**2) for _ in range(n)]
 
-def medir_tempo(func, array):
-    inicio = time.perf_counter()
-    func(array)
-    fim = time.perf_counter()
-    return fim - inicio
+    numeros.sort()
 
-def gerar_tabela_comparacao(vetores_nomes):
-    # print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}")
-    print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}{'Merge':<10}{'Quick':<10}{'Heap':<10}{'Counting':<10}")
+    i_toshuffle = [random.randint(1, n) for _ in range(math.ceil(0.1 * n))]
+    #lista de índices das posições que serão trocadas 
 
-    tempos_bubble = []
-    tempos_insertion = []
-    tempos_merge = []
-    tempos_quick = []
-    tempos_heap = []
-    tempos_counting = []
-    tamanhos = []
+    for i in range(0, len(i_toshuffle)):
+        numeros[i_toshuffle[i]] = random.randint(1, n**2)
 
-    for nome_arquivo in vetores_nomes:
-        vetor = ler_arquivo(nome_arquivo)
-        tamanho = len(vetor)
-        max_value = max(vetor)
+    return numeros
 
-        tempos = [
-            medir_tempo(lambda arr: counting_sort.counting_sort(arr.copy(), [0] * len(arr), max_value), vetor),
-            medir_tempo(lambda arr: bubble_sort.bubble_sort(arr.copy(), len(arr)), vetor),
-            medir_tempo(lambda arr: insertion_sort.insertion_sort(arr.copy()), vetor),
-            medir_tempo(lambda arr: merge_sort.merge_sort(arr.copy(), 0, len(arr) - 1), vetor),
-            medir_tempo(lambda arr: quick_sort.quick_sort(arr.copy(), 0, len(arr) - 1), vetor),
-            medir_tempo(lambda arr: heap_sort.heap_sort(arr.copy()), vetor)
-        ]
 
-        tempos_counting.append(tempos[0])
-        tempos_bubble.append(tempos[1])
-        tempos_insertion.append(tempos[2])
-        tempos_merge.append(tempos[3])
-        tempos_quick.append(tempos[4])
-        tempos_heap.append(tempos[5])
-        tamanhos.append(tamanho)
-
-        salvar_em_arquivo(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting)
-        print(f"{tamanho:<10}" + "".join([f"{tempo:<10.6f}" for tempo in tempos]))
-
-    # return tamanhos, tempos_bubble, tempos_insertion
-    return tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting
-
-#----------Main----------#
+#----------- MAIN -----------#
 
 def main():
 
-    print()
-    vetores_nomes = ['Dados/mil.txt', 'Dados/doismil.txt', 'Dados/tresmil.txt', 'Dados/quatromil.txt', 'Dados/cincomil.txt']
-    # tamanhos, tempos_bubble, tempos_insertion = gerar_tabela_comparacao(vetores_nomes)
-    tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting = gerar_tabela_comparacao(vetores_nomes)
-    print()
 
-    fig, ax = plt.subplots()
+    print("\t[1] Testar caso vetor aleatório;\
+           \t[2] Testar caso vetor quase ordenado;\
+           \t[3] Testar caso vetor ordenado crescentemente;\
+           \t[4] Testar caso vetor ordenado decrescentemente;\
+           Escolha: ", end='')   
+    escolha = int(input())
 
-    ax.plot(tamanhos, tempos_bubble, label='Bubble', marker='o')
-    ax.plot(tamanhos, tempos_insertion, label='Insertion', marker='o')
-    ax.plot(tamanhos, tempos_merge, label='Merge', marker='o')
-    ax.plot(tamanhos, tempos_quick, label='Quick', marker='o')
-    ax.plot(tamanhos, tempos_heap, label='Heap', marker='o')
-    ax.plot(tamanhos, tempos_counting, label='Counting', marker='o')
+    inc = int(input("\tParâmetro inc (tamanho inicial do vetor): "))
+    fim = int(input("\tParâmetro fim (tamanho final do vetor): "))
+    stp = int(input("\tParâmetro str (intervalos entre os tamanhos): "))
 
-    xticks_interval = 1000
-    xticks = np.arange(min(tamanhos), max(tamanhos) + xticks_interval, xticks_interval)
-    ax.set_xticks(xticks)
+    if escolha == 1:
+        rpt = int(input("\tParâmetro rpt (número de repetições para média): "))
 
-    ax.set_xlabel('Tamanho do Vetor')
-    ax.set_ylabel('Tempo de Execução (segundos)')
-    ax.set_title('Vetor aleatório')
-    ax.legend()
-    ax.grid(True)
+        for caso in range(0, rpt):
+            for n in range(inc, fim + 1, stp):
+                vetor = gerar_numeros_aleatorios(n)
 
-    plt.show()
+                #cópias do vetor gerado aleatóriamente para passagem como parâmetro para cada algoritmo de ordenação
+                copia_bubble, copia_insertion, copia_heap, copia_merge, copia_quick, copia_counting = vetor.copy()
+
+                
+
+                
+
+
+
 
 if __name__ == '__main__':
     main()
