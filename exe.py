@@ -28,13 +28,13 @@ def salvar_em_arquivo(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, t
         
 
 def medir_tempo(func, array):
-    inicio = time.perf_counter()
+    inicio = time.time()
     func(array)
-    fim = time.perf_counter()
+    fim = time.time()
     return fim - inicio
 
 def gerar_tabela_comparacao(vetores_nomes):
-    print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}")
+    # print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}")
     print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}{'Merge':<10}{'Quick':<10}{'Heap':<10}{'Counting':<10}")
 
     tempos_bubble = []
@@ -92,7 +92,7 @@ def main():
     ax.plot(tamanhos, tempos_heap, label='Heap', marker='o')
     ax.plot(tamanhos, tempos_counting, label='Counting', marker='o')
 
-    xticks_interval = 1000
+    xticks_interval = 500
     xticks = np.arange(min(tamanhos), max(tamanhos) + xticks_interval, xticks_interval)
     ax.set_xticks(xticks)
 

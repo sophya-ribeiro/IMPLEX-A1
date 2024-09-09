@@ -28,9 +28,9 @@ def salvar_em_arquivo(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, t
         
 
 def medir_tempo(func, array):
-    inicio = time.perf_counter()
+    inicio = time.time()
     func(array)
-    fim = time.perf_counter()
+    fim = time.time()
     return fim - inicio
 
 def gerar_tabela_comparacao(vetores_nomes):
