@@ -71,7 +71,7 @@ def gerar_tabela_comparacao(vetores_nomes):
         print(f"{tamanho:<10}" + "".join([f"{tempo:<10.6f}" for tempo in tempos]))
 
     # return tamanhos, tempos_bubble, tempos_insertion
-    return tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting
+    return tamanhos, tempos_counting, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap 
 
 #----------Main----------#
 
