@@ -50,6 +50,15 @@ def gerar_tabela_comparacao(vetores_nomes):
         tamanho = len(vetor)
         max_value = max(vetor)
 
+        """
+        copia_bubble = arr.copy()
+        copia_insertion = arr.copy()
+        copia_heap = arr.copy()
+        copia_merge = arr.copy()
+        copia_quick = arr.copy()
+        copia_counting = arr.copy()
+        """
+
         tempos = [
             medir_tempo(lambda arr: bubble_sort.bubble_sort(arr.copy(), len(arr)), vetor),
             medir_tempo(lambda arr: insertion_sort.insertion_sort(arr.copy()), vetor),
