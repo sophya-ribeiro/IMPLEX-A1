@@ -1,3 +1,11 @@
 #ambiente virtual
 .venv/
 
+#arquivo de saida
+saida.txt
+
+#dados para ordenação
+Dados/
+
+#anotaçoes
+anota.txt

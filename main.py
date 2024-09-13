@@ -4,9 +4,14 @@ import heap_sort
 import quick_sort
 import insertion_sort
 import merge_sort
+
 import random
 import math
+
 import time
+
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 #-------Funções auxiliares-------#
@@ -14,7 +19,7 @@ import time
 def gerar_numeros_aleatorios(n: int) -> list:
  
     # 'n**2' limitação para manter o tempo do counting sort linear
-    numeros = [random.randint(1, n**2) for _ in range(n)]
+    numeros = [random.randint(1, n) for _ in range(n)]
     return numeros
 
   
@@ -35,8 +40,11 @@ def gerar_vetor_quase_ordenado(n: int) -> list:
 def testar_vetor_aleatorio(fim: int, inc: int, stp: int):
     rpt = int(input("\tParâmetro rpt (número de repetições para média): "))
 
+    print()
+    print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}{'Merge':<10}{'Heap':<10}{'Quick':<10}{'Counting':<10}")
+
     # É o número de pontos de medição que o gráfico deverá apresentar
-    n_pontos = ((fim - inc) + 1) // stp 
+    n_pontos = ((fim - inc) // stp)+ 1
 
     # Aqui são as listas de testes, em cada posição haverá a média dos tempos de execução 
     tempos_bubble = [0.0] * n_pontos
@@ -45,15 +53,21 @@ def testar_vetor_aleatorio(fim: int, inc: int, stp: int):
     tempos_quick = [0.0] * n_pontos
     tempos_merge = [0.0] * n_pontos
     tempos_counting = [0.0] * n_pontos
+    tamanhos = []
+
+    indice_tempos = 0 # indice para percorrer o número de pontos de medição
 
     for n in range(inc, fim + 1, stp):
         """
         Soma os valores de tamanho dos vetores para teste, a partir dos quais será construído o gráfico.
         Em outras palavras, percorre os pontos de medição, em que 'n' assume o tamanho atual do vetor.
         """
+
+        tamanhos.append(n)
         
-        indice_tempos = 0 # indice para percorrer o número de pontos de medição
+        
         for _ in range(0, rpt):
+
             """
             Roda o número de casos de teste para o vetor aleatório, a fim de obter, 
             ao final, uma média dos tempos de execução de cada algoritmo.
@@ -114,7 +128,34 @@ def testar_vetor_aleatorio(fim: int, inc: int, stp: int):
         tempos_merge[indice_tempos] /= rpt
         tempos_counting[indice_tempos] /= rpt 
 
+        print(f"{n:<10}{tempos_bubble[indice_tempos]:<10.6f}{tempos_insertion[indice_tempos]:<10.6f}{tempos_merge[indice_tempos]:<10.6f}{tempos_heap[indice_tempos]:<10.6f}{tempos_quick[indice_tempos]:<10.6f}{tempos_counting[indice_tempos]:<10.6f}")
+
         indice_tempos += 1
+
+    gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting)
+    print()
+
+def gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting):
+    fig, ax = plt.subplots()
+
+    ax.plot(tamanhos, tempos_bubble, label='Bubble', marker='o')
+    ax.plot(tamanhos, tempos_insertion, label='Insertion', marker='o')
+    ax.plot(tamanhos, tempos_merge, label='Merge', marker='o')
+    ax.plot(tamanhos, tempos_quick, label='Quick', marker='o')
+    ax.plot(tamanhos, tempos_heap, label='Heap', marker='o')
+    ax.plot(tamanhos, tempos_counting, label='Counting', marker='o')
+
+    xticks_interval = 500
+    xticks = np.arange(min(tamanhos), max(tamanhos) + xticks_interval, xticks_interval)
+    ax.set_xticks(xticks)
+
+    ax.set_xlabel('Tamanho do Vetor')
+    ax.set_ylabel('Tempo de Execução (segundos)')
+    ax.set_title('Vetor aleatório')
+    ax.legend()
+    ax.grid(True)
+
+    plt.show()
 
 #----------- MAIN -----------#
 
