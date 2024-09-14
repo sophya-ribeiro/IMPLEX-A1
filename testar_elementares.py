@@ -47,15 +47,7 @@ def gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempo
     ax.plot(tamanhos, tempos_heap, label='Heap', marker='o')
     ax.plot(tamanhos, tempos_counting, label='Counting', marker='o')
 
-    # ax.plot(tamanhos, tempos_bubble, label='Bubble')
-    # ax.plot(tamanhos, tempos_insertion, label='Insertion')
-    # ax.plot(tamanhos, tempos_merge, label='Merge')
-    # ax.plot(tamanhos, tempos_quick, label='Quick')
-    # ax.plot(tamanhos, tempos_heap, label='Heap')
-    # ax.plot(tamanhos, tempos_counting, label='Counting')
-
     xticks_interval = 500
-    plt.xticks(fontsize=6)
     xticks = np.arange(min(tamanhos), max(tamanhos) + xticks_interval, xticks_interval)
     ax.set_xticks(xticks)
 
@@ -191,7 +183,7 @@ def testar_caso_unico(fim: int, inc: int, stp: int, escolha: int):
     tempos_quick = [0.0] * n_pontos
     tempos_merge = [0.0] * n_pontos
     tempos_counting = [0.0] * n_pontos
-    tamanhos = [] # guarda a lista de valores n que o vetor assume.
+    tamanhos = [] # guarda a lista de valores n que o vetor
 
     indice_tempos = 0 # iterador para percorrer o número de pontos de medição
 
