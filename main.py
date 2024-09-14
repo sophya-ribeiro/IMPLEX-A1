@@ -289,16 +289,28 @@ def main():
     stp = int(input("\tParâmetro stp (intervalos entre os tamanhos): "))
 
     if escolha == 1:
+        start = time.time()
         testar_vetor_aleatorio(fim, inc, stp)
+        end = time.time()
+        print(f"\nTempo total: {(end-start)//60}")
 
     elif escolha == 2:
+        start = time.time()
         testar_caso_unico(fim, inc, stp, 2)
+        end = time.time()
+        print(f"\nTempo total: {(end-start)//60}")
 
     elif escolha == 3:
+        start = time.time()
         testar_caso_unico(fim, inc, stp, 3)
+        end = time.time()
+        print(f"\nTempo total: {(end-start)//60}")
 
     elif escolha == 4:
+        start = time.time()
         testar_caso_unico(fim, inc, stp, 4)
+        end = time.time()
+        print(f"\nTempo total: {(end-start)//60}")
 
     else:
         print("Escolha inválida!")
