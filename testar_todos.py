@@ -63,14 +63,14 @@ def gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempo
     ax.set_ylabel('Tempo de Execução (segundos)')
 
     if escolha == 1 :
-        ax.set_title('[[RANDOM]]')
+        ax.set_title('Vetor Aleatório')
     elif escolha == 2:
-        ax.set_title('[[NEARLY SORTED]]')
+        ax.set_title('Vetor Quase Ordenado')
     elif escolha == 3:
-        ax.set_title('[[SORTED]]')
+        ax.set_title('Vetor Ordenado')
     else:
         # Se a escolha for 4
-        ax.set_title('[[REVERSE]]')
+        ax.set_title('Vetor Reverso')
     ax.legend()
     ax.grid(True)
 
