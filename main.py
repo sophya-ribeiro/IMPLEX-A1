@@ -48,6 +48,7 @@ def gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempo
     ax.plot(tamanhos, tempos_counting, label='Counting', marker='o')
 
     xticks_interval = 1000
+    plt.xticks(fontsize=5)
     xticks = np.arange(min(tamanhos), max(tamanhos) + xticks_interval, xticks_interval)
     ax.set_xticks(xticks)
 
@@ -211,7 +212,7 @@ def testar_caso_unico(fim: int, inc: int, stp: int, escolha: int):
         else: 
             #vetor = (gerar_numeros_aleatorios(n)).sort(reverse=True)
 
-            
+            valor_inicial = fim - (stp * indice_tempos)
             # Gera o vetor decrescente
             vetor = [value for value in range(valor_inicial, 0, -1)]
             if(indice_tempos == 0 or indice_tempos == 1):
@@ -292,7 +293,7 @@ def main():
         start = time.time()
         testar_vetor_aleatorio(fim, inc, stp)
         end = time.time()
-        print(f"\nTempo total: {(end-start)//60}")
+        print(f"\nTempo total: {(end-start)//60} minutos")
 
     elif escolha == 2:
         start = time.time()
