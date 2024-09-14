@@ -211,9 +211,9 @@ def testar_caso_unico(fim: int, inc: int, stp: int, escolha: int):
         else: 
             #vetor = (gerar_numeros_aleatorios(n)).sort(reverse=True)
 
-            valor_inicial = fim - (stp * indice_tempos)
+            
             # Gera o vetor decrescente
-            vetor = [value for value in range(valor_inicial, 0, -1)]
+            vetor = [value for value in range(n, 0, -1)]
             # if(indice_tempos == 0 or indice_tempos == 1):
             #     print(vetor)
 
