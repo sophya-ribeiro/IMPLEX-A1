@@ -204,14 +204,18 @@ def testar_caso_unico(fim: int, inc: int, stp: int, escolha: int):
             #vetor = (gerar_numeros_aleatorios(n)).sort()
 
             # Os valores gerados aqui podem começar em 0
-            vetor = [value for value in range(0, n)]
+            vetor = [value for value in range(0, n+1)]
+            if(indice_tempos == 0 or indice_tempos == 1):
+                print(vetor)
 
         else: 
             #vetor = (gerar_numeros_aleatorios(n)).sort(reverse=True)
 
             valor_inicial = fim - (stp * indice_tempos)
             # Gera o vetor decrescente
-            vetor = [value for value in range(valor_inicial, 1, -1)]                   
+            vetor = [value for value in range(valor_inicial, 0, -1)]
+            if(indice_tempos == 0 or indice_tempos == 1):
+                print(vetor)
 
         #cópias do vetor gerado aleatóriamente para passagem como parâmetro para cada algoritmo de ordenação
         copia_bubble = vetor.copy()
