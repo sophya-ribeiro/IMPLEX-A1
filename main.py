@@ -28,7 +28,7 @@ def gerar_vetor_quase_ordenado(n: int) -> list:
 
     numeros.sort()
 
-    i_toshuffle = [random.randint(0, n-1) for _ in range(math.ceil(0.1 * n))]
+    i_toshuffle = [random.randint(0, n) for _ in range(math.ceil(0.1 * n))]
     #lista de índices das posições que serão trocadas 
 
     for i in range(0, len(i_toshuffle)):
@@ -47,7 +47,7 @@ def gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempo
     ax.plot(tamanhos, tempos_heap, label='Heap', marker='o')
     ax.plot(tamanhos, tempos_counting, label='Counting', marker='o')
 
-    xticks_interval = 500
+    xticks_interval = 1000
     xticks = np.arange(min(tamanhos), max(tamanhos) + xticks_interval, xticks_interval)
     ax.set_xticks(xticks)
 
@@ -55,14 +55,14 @@ def gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempo
     ax.set_ylabel('Tempo de Execução (segundos)')
 
     if escolha == 1 :
-        ax.set_title('[[RANDOM]]')
+        ax.set_title('Vetor aleatório')
     elif escolha == 2:
-        ax.set_title('[[NEARLY SORTED]]')
+        ax.set_title('Vetor "quase" ordenado')
     elif escolha == 3:
-        ax.set_title('[[SORTED]]')
+        ax.set_title('Vetor ordenado de maneira crescente')
     else:
         # Se a escolha for 4
-        ax.set_title('[[REVERSE]]')
+        ax.set_title('Vetor ordenado de maneira decrescente')
     ax.legend()
     ax.grid(True)
 
@@ -205,17 +205,17 @@ def testar_caso_unico(fim: int, inc: int, stp: int, escolha: int):
 
             # Os valores gerados aqui podem começar em 0
             vetor = [value for value in range(0, n+1)]
-            # if(indice_tempos == 0 or indice_tempos == 1):
-            #     print(vetor)
+            if(indice_tempos == 0 or indice_tempos == 1):
+                print(vetor)
 
         else: 
             #vetor = (gerar_numeros_aleatorios(n)).sort(reverse=True)
 
             
             # Gera o vetor decrescente
-            vetor = [value for value in range(n, 0, -1)]
-            # if(indice_tempos == 0 or indice_tempos == 1):
-            #     print(vetor)
+            vetor = [value for value in range(valor_inicial, 0, -1)]
+            if(indice_tempos == 0 or indice_tempos == 1):
+                print(vetor)
 
         #cópias do vetor gerado aleatóriamente para passagem como parâmetro para cada algoritmo de ordenação
         copia_bubble = vetor.copy()
