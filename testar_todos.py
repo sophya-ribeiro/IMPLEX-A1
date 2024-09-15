@@ -29,9 +29,11 @@ def gerar_vetor_quase_ordenado(n: int) -> list:
     numeros.sort()
 
     i_toshuffle = [random.randint(0, n-1) for _ in range(math.ceil(0.1 * n))]
-    #lista de índices das posições que serão trocadas 
+    #lista de índices das posições que serão trocadas.
+    # Escolhe 10% dos índices aleatoriamente. 
 
     for i in range(0, len(i_toshuffle)):
+        # Troca os valores nas posições escolhidas por qualquer valor aleatório dentro do intervalo
         numeros[i_toshuffle[i]] = random.randint(0, n)
 
     return numeros
@@ -287,8 +289,8 @@ def main():
     print("\n\
           \t[1] Testar caso vetor aleatório;\n\
            \t[2] Testar caso vetor quase ordenado;\n\
-           \t[3] Testar caso vetor ordenado crescentemente;\n\
-           \t[4] Testar caso vetor ordenado decrescentemente;\n\
+           \t[3] Testar caso vetor ordenado;\n\
+           \t[4] Testar caso vetor reverso;\n\
            Escolha: ", end='')   
     escolha = int(input())
 

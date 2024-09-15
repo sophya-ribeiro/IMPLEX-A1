@@ -35,7 +35,7 @@ def gerar_vetor_quase_ordenado(n: int) -> list:
     return numeros
 
 
-def gerar_grafico(tamanhos, tempos_merge, tempos_quick, tempos_heap, tempos_counting, escolha: int):
+def gerar_grafico(tamanhos, tempos_merge, tempos_quick, tempos_heap, tempos_counting, escolha: int, stp):
     fig, ax = plt.subplots()
 
     ax.plot(tamanhos, tempos_merge, label='Merge', marker='o')
@@ -43,7 +43,7 @@ def gerar_grafico(tamanhos, tempos_merge, tempos_quick, tempos_heap, tempos_coun
     ax.plot(tamanhos, tempos_heap, label='Heap', marker='o')
     ax.plot(tamanhos, tempos_counting, label='Counting', marker='o')
 
-    xticks_interval = 500
+    xticks_interval = stp
     xticks = np.arange(min(tamanhos), max(tamanhos) + xticks_interval, xticks_interval)
     ax.set_xticks(xticks)
 
@@ -139,7 +139,7 @@ def testar_vetor_aleatorio(fim: int, inc: int, stp: int):
 
         indice_tempos += 1
 
-    gerar_grafico(tamanhos, tempos_merge, tempos_quick, tempos_heap, tempos_counting, 1)
+    gerar_grafico(tamanhos, tempos_merge, tempos_quick, tempos_heap, tempos_counting, 1, stp)
     print()
 
 
@@ -229,7 +229,7 @@ def testar_caso_unico(fim: int, inc: int, stp: int, escolha: int):
 
         indice_tempos += 1
 
-    gerar_grafico(tamanhos, tempos_merge, tempos_quick, tempos_heap, tempos_counting, escolha)
+    gerar_grafico(tamanhos, tempos_merge, tempos_quick, tempos_heap, tempos_counting, escolha, stp)
     print()
 
 #----------- MAIN -----------#
@@ -241,8 +241,8 @@ def main():
     print("\n\
           \t[1] Testar caso vetor aleatório;\n\
            \t[2] Testar caso vetor quase ordenado;\n\
-           \t[3] Testar caso vetor ordenado crescentemente;\n\
-           \t[4] Testar caso vetor ordenado decrescentemente;\n\
+           \t[3] Testar caso vetor ordenado;\n\
+           \t[4] Testar caso vetor reverso;\n\
            Escolha: ", end='')   
     escolha = int(input())
 

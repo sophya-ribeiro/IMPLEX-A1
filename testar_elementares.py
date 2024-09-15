@@ -33,13 +33,13 @@ def gerar_vetor_quase_ordenado(n: int) -> list:
     return numeros
 
 
-def gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, escolha: int):
+def gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, escolha: int, stp):
     fig, ax = plt.subplots()
 
     ax.plot(tamanhos, tempos_bubble, label='Bubble', marker='o')
     ax.plot(tamanhos, tempos_insertion, label='Insertion', marker='o')
 
-    xticks_interval = 500
+    xticks_interval = stp
     xticks = np.arange(min(tamanhos), max(tamanhos) + xticks_interval, xticks_interval)
     ax.set_xticks(xticks)
 
@@ -114,7 +114,7 @@ def testar_vetor_aleatorio(fim: int, inc: int, stp: int):
 
         indice_tempos += 1
 
-    gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, 1)
+    gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, 1, stp)
     print()
 
 
@@ -186,7 +186,7 @@ def testar_caso_unico(fim: int, inc: int, stp: int, escolha: int):
 
         indice_tempos += 1
 
-    gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, escolha)
+    gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, escolha, stp)
     print()
 
 #----------- MAIN -----------#
@@ -198,8 +198,8 @@ def main():
     print("\n\
           \t[1] Testar caso vetor aleatório;\n\
            \t[2] Testar caso vetor quase ordenado;\n\
-           \t[3] Testar caso vetor ordenado crescentemente;\n\
-           \t[4] Testar caso vetor ordenado decrescentemente;\n\
+           \t[3] Testar caso vetor ordenado;\n\
+           \t[4] Testar caso vetor reverso;\n\
            Escolha: ", end='')   
     escolha = int(input())
 
