@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Estudantes: Sophya Ribeiro e Soraya Ferreira
+
+
 # Módulos criados com os algoritmos de ordenação
 import bubble_sort
 import insertion_sort

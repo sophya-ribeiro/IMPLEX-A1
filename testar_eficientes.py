@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Estudantes: Sophya Ribeiro e Soraya Ferreira
+
+
 # Módulos criados com os algoritmos de ordenação
 import counting_sort
 import heap_sort

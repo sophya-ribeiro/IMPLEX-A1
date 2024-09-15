@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Estudantes: Sophya Ribeiro e Soraya Ferreira
 
 import sys
 import math
