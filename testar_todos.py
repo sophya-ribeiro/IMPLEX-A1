@@ -1,22 +1,29 @@
+# Módulos criados com os algoritmos de ordenação
 import bubble_sort
 import counting_sort
 import heap_sort
 import quick_sort
 import insertion_sort
 import merge_sort
-
+# Bibliotecas para funções auxiliares
 import random
 import math
 import sys
 import time
-
+# Bibliotecas para visualização do gráfico
 import matplotlib.pyplot as plt
 import numpy as np
 
 
-#-------Funções auxiliares-------#
+#-------Funções para geração de vetores específicos-------#
 
 def gerar_numeros_aleatorios(n: int) -> list:
+    """
+    Esta função recebe 'n' como o tamanho do vetor a ser 
+    gerado e retorna uma lista com n números aleatórios, sendo
+    que os valores dentro do vetor não podem ultrapassar o número 
+    'n'.
+    """
  
     # 'n' limitação para manter o tempo do counting sort linear
     numeros = [random.randint(0, n) for _ in range(n)]
@@ -24,6 +31,12 @@ def gerar_numeros_aleatorios(n: int) -> list:
 
   
 def gerar_vetor_quase_ordenado(n: int) -> list:
+    """
+    Essa função recebe 'n' como o tamanho do vetor a ser gerado
+    e retorna uma lista com n números aleatórios, 90% ordenados
+    de modo crescente e 10% desordenados, escolhidos aleatoriamente. 
+    """
+
     numeros = [random.randint(0, n) for _ in range(n)]
 
     numeros.sort()
@@ -39,7 +52,14 @@ def gerar_vetor_quase_ordenado(n: int) -> list:
     return numeros
 
 
-def gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting, escolha: int):
+def gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting, escolha: int, stp: int):
+    """
+    Essa função tem o objetivo de gerar o gráfico para melhor visualização dos tempos
+    de execução dos algoritmos. Ela recebe um vetor com todos os tamanhos de vetor testados,
+    listas com os tempos de execução de cada algoritmo, conforme o tamanho, um inteiro para
+    exibir o título do gráfico de acordo com a escolha de teste, e outro com o intervalo entre
+    as medições do gráfico.
+    """
     fig, ax = plt.subplots()
 
     ax.plot(tamanhos, tempos_bubble, label='Bubble', marker='o')
@@ -49,14 +69,7 @@ def gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempo
     ax.plot(tamanhos, tempos_heap, label='Heap', marker='o')
     ax.plot(tamanhos, tempos_counting, label='Counting', marker='o')
 
-    # ax.plot(tamanhos, tempos_bubble, label='Bubble')
-    # ax.plot(tamanhos, tempos_insertion, label='Insertion')
-    # ax.plot(tamanhos, tempos_merge, label='Merge')
-    # ax.plot(tamanhos, tempos_quick, label='Quick')
-    # ax.plot(tamanhos, tempos_heap, label='Heap')
-    # ax.plot(tamanhos, tempos_counting, label='Counting')
-
-    xticks_interval = 500
+    xticks_interval = stp
     plt.xticks(fontsize=6)
     xticks = np.arange(min(tamanhos), max(tamanhos) + xticks_interval, xticks_interval)
     ax.set_xticks(xticks)
@@ -78,13 +91,24 @@ def gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempo
 
     plt.show()
 
+
+#-------Funções para testar os algoritmos-------#
+
 def testar_vetor_aleatorio(fim: int, inc: int, stp: int):
+    """
+    Esta função recebe os parâmetro escolhidos pelo usuário e realiza os testes
+    apenas com o vetor aleatório, para a escolha 1. Ela mede os tempos de execução,
+    calculando uma média de tempos, cria listas com todos as médias para cada algoritmo
+    de ordenação, e exibe no terminal a tebela com as médias de tempo para cada tamanho
+    de vetor testado. 
+    """
+
     rpt = int(input("\tParâmetro rpt (número de repetições para média): "))
 
     print()
     print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}{'Merge':<10}{'Heap':<10}{'Quick':<10}{'Counting':<10}")
 
-    # É o número de pontos de medição que o gráfico deverá apresentar
+    # É o número de pontos de medição que o gráfico deverá apresentar, isto é, o número de tamanhos testados.
     n_pontos = ((fim - inc) // stp)+ 1
 
     # Aqui são as listas de testes, em cada posição haverá a média dos tempos de execução 
@@ -164,13 +188,13 @@ def testar_vetor_aleatorio(fim: int, inc: int, stp: int):
         tempos_heap[indice_tempos] /= rpt
         tempos_quick[indice_tempos] /= rpt
         tempos_merge[indice_tempos] /= rpt
-        tempos_counting[indice_tempos] /= rpt 
+        tempos_counting[indice_tempos] /= rpt
 
         print(f"{n:<10}{tempos_bubble[indice_tempos]:<10.6f}{tempos_insertion[indice_tempos]:<10.6f}{tempos_merge[indice_tempos]:<10.6f}{tempos_heap[indice_tempos]:<10.6f}{tempos_quick[indice_tempos]:<10.6f}{tempos_counting[indice_tempos]:<10.6f}")
 
         indice_tempos += 1
 
-    gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting, 1)
+    gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting, 1, stp)
     print()
 
 
@@ -178,7 +202,8 @@ def testar_vetor_aleatorio(fim: int, inc: int, stp: int):
 def testar_caso_unico(fim: int, inc: int, stp: int, escolha: int):
     """
     Gera os testes para cada caso que não necessita de repetições para
-    realizar uma média de tempos.
+    realizar uma média de tempos - escolhas 2, 3 e 4. Recebe os parâmetros
+    dados pelos usuário e o inteiro com a escolha.
     """
     print()
     print(f"{'Tamanho':<10}{'Bubble':<10}{'Insertion':<10}{'Merge':<10}{'Heap':<10}{'Quick':<10}{'Counting':<10}")
@@ -202,30 +227,17 @@ def testar_caso_unico(fim: int, inc: int, stp: int, escolha: int):
         Soma os valores de tamanho dos vetores para teste, a partir dos quais será construído o gráfico.
         Em outras palavras, percorre os pontos de medição, em que 'n' assume o tamanho atual do vetor.
         """
-
         tamanhos.append(n)
-        
 
         if escolha == 2:
-            # recebe um vetor com 10% de seus valores embaralhados entre si.
             vetor = gerar_vetor_quase_ordenado(n)
             
         elif escolha == 3:
-            #vetor = (gerar_numeros_aleatorios(n)).sort()
-
-            # Os valores gerados aqui podem começar em 0
             vetor = [value for value in range(0, n+1)]
-            # if(indice_tempos == 0 or indice_tempos == 1):
-            #     print(vetor)
 
-        else: 
-            #vetor = (gerar_numeros_aleatorios(n)).sort(reverse=True)
-
-            
+        else:             
             # Gera o vetor decrescente
             vetor = [value for value in range(n, 0, -1)]
-            # if(indice_tempos == 0 or indice_tempos == 1):
-            #     print(vetor)
 
         #cópias do vetor gerado aleatóriamente para passagem como parâmetro para cada algoritmo de ordenação
         copia_bubble = vetor.copy()
@@ -277,13 +289,13 @@ def testar_caso_unico(fim: int, inc: int, stp: int, escolha: int):
 
         indice_tempos += 1
 
-    gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting, escolha)
+    gerar_grafico(tamanhos, tempos_bubble, tempos_insertion, tempos_merge, tempos_quick, tempos_heap, tempos_counting, escolha, stp)
     print()
 
 #----------- MAIN -----------#
-
 def main():
 
+    # Foi necessário aumentar o limite de chamadas recursivas do python
     sys.setrecursionlimit(100000)
 
     print("\n\
